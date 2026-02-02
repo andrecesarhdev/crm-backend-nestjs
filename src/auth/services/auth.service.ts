@@ -13,6 +13,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  // Validação do login
   async validateUser(email: string, senha: string): Promise<User> {
     const user = await this.userRepository.findOne({
       where: { email },
@@ -31,6 +32,7 @@ export class AuthService {
     return user;
   }
 
+  //login
   async login(email: string, senha: string) {
     const user = await this.validateUser(email, senha);
 
