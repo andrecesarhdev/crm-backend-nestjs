@@ -1,98 +1,149 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+🚀 CRM Backend – NestJS + MySQL
+API backend desenvolvida em NestJS como projeto de consolidação de conhecimentos em desenvolvimento backend, com foco em boas práticas, autenticação JWT, autorização por roles, arquitetura modular e documentação com Swagger.
+Este projeto simula um sistema CRM, permitindo o gerenciamento de usuários, categorias e produtos, com controle de acesso baseado em perfil.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+🧠 Objetivo do Projeto
+Consolidar fundamentos de backend com NestJS
+Aplicar JWT Authentication
+Implementar Role-Based Access Control (RBAC)
+Trabalhar com MySQL + TypeORM
+Documentar a API com Swagger
+Estruturar o projeto de forma escalável e profissional
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+🛠️ Tecnologias Utilizadas
+Node.js
+NestJS
+TypeScript
+MySQL
+TypeORM
+JWT (JSON Web Token)
+Passport.js
+Bcrypt
+Swagger (OpenAPI)
+Class-validator / Class-transformer
 
-## Description
+📂 Arquitetura do Projeto
+O projeto segue uma arquitetura modular, separando responsabilidades por domínio:
+src/
+ ├── auth/
+ │   ├── controllers
+ │   ├── dto
+ │   ├── guards
+ │   ├── decorators
+ │   ├── strategies
+ │   └── services
+ ├── users/
+ ├── categories/
+ ├── products/
+ ├── app.module.ts
+ └── main.ts
+ 
+Padrões adotados
+Controllers → apenas controle de requisição
+Services → regras de negócio
+DTOs → validação e contrato de dados
+Guards → autenticação e autorização
+Decorators customizados (@CurrentUser, @Roles)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+🔐 Autenticação e Autorização
 
-## Project setup
+🔑 Autenticação
+Autenticação baseada em JWT
+Login via email e senha
+Token retornado no login
 
-```bash
-$ npm install
-```
+👤 Autorização por Role
+Controle de acesso baseado em perfil do usuário:
+ADMIN
+MANAGER
+SELLER
+OPERATOR
 
-## Compile and run the project
+Exemplo:
+Apenas ADMIN pode criar produtos
+Outras roles têm acesso restrito conforme regras da aplicação
 
-```bash
-# development
-$ npm run start
+🧩 Principais Funcionalidades
 
-# watch mode
-$ npm run start:dev
+👥 Usuários
+Cadastro de usuários
+Criptografia de senha com bcrypt
+Definição de role
 
-# production mode
-$ npm run start:prod
-```
+📦 Produtos
+CRUD completo
+Status automático (ATIVO / INATIVO)
+Associação com categoria
+Associação com usuário criador
+Filtros por status e categoria
 
-## Run tests
+🗂️ Categorias
+Cadastro de categorias
+Associação com produtos
 
-```bash
-# unit tests
-$ npm run test
+Documentação com Swagger
+A API está totalmente documentada utilizando Swagger.
+Após rodar o projeto, acesse:
+http://localhost:4000/swagger
 
-# e2e tests
-$ npm run test:e2e
+No Swagger é possível:
+Visualizar todas as rotas
+Testar endpoints
+Realizar login
+Autorizar requisições com JWT via Authorize 🔐
 
-# test coverage
-$ npm run test:cov
-```
+⚙️ Configuração de Ambiente
+O projeto utiliza variáveis de ambiente.
 
-## Deployment
+📄 Arquivos de ambiente
+.env.development → ambiente local
+.env.production → ambiente de produção
+.env.example → modelo (versionado)
+Exemplo de .env.example:
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+NODE_ENV=
+PORT=
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+DB_HOST=
+DB_PORT=
+DB_USER=
+DB_PASS=
+DB_NAME=
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+JWT_SECRET=
+JWT_EXPIRES_IN=
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+▶️ Como Rodar o Projeto
+1️⃣ Clonar o repositório
+git clone https://github.com/seu-usuario/crm-backend.git
+2️⃣ Instalar dependências
+npm install
+3️⃣ Configurar o banco de dados
+Criar um banco MySQL
+Ajustar o .env.development
+4️⃣ Rodar a aplicação
+npm run start:dev
 
-## Resources
+🧪 Testes
 
-Check out a few resources that may come in handy when working with NestJS:
+O projeto está preparado para:
+Testes unitários (Jest)
+Testes e2e (Jest + Supertest)
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+📌 Status do Projeto
 
-## Support
+✔ Backend funcional
+✔ Autenticação JWT
+✔ Autorização por roles
+✔ Swagger documentado
+✔ Pronto para integração com frontend
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+🧠 Observação Final
+Este projeto foi desenvolvido com foco em aprendizado, boas práticas e evolução profissional, servindo como base para aplicações reais e como material de portfólio.
 
-## Stay in touch
+👨‍💻 Autor
+André César Henrique
+📍 Recife – PE
+🔗 GitHub: https://github.com/andrecesarhdev
+📧 Email: andrecesarhenrique@gmail.com
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
